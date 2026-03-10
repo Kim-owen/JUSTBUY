@@ -1,0 +1,284 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+    --acc: #6c5ce7;
+    --acc-glow: rgba(108, 92, 231, 0.4);
+    --neon: #00cec9;
+    --rose: #fd79a8;
+    --gold: #fdcb6e;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    overflow-x: hidden;
+    transition: background 0.5s cubic-bezier(0.4, 0, 0.2, 1), color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    background: var(--bg0);
+    color: var(--txt);
+    line-height: 1.6;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--acc);
+    border-radius: 99px;
+}
+
+::selection {
+    background: var(--acc-glow);
+    color: #fff;
+}
+
+/* ── TYPOGRAPHY ── */
+.outfit {
+    font-family: 'Outfit', sans-serif;
+}
+
+.mono {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.jakarta {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* ── LAYOUT UTILS ── */
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 24px;
+    }
+}
+
+/* ── GLASS DEEP ── */
+.glass {
+    background: var(--glass);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid var(--glassBorder);
+    border-radius: 24px;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.glass:hover {
+    background: var(--glassHover);
+    border-color: rgba(108, 92, 231, 0.3);
+    box-shadow: 0 20px 40px var(--shadow), 0 0 0 1px rgba(108, 92, 231, 0.1);
+    transform: translateY(-4px);
+}
+
+.glass-nav {
+    background: var(--navBg);
+    backdrop-filter: blur(32px) saturate(200%);
+    -webkit-backdrop-filter: blur(32px) saturate(200%);
+    border-bottom: 1px solid var(--glassBorder);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0);
+    }
+
+    50% {
+        transform: translateY(-15px) rotate(1deg);
+    }
+}
+
+@keyframes orbMove {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    33% {
+        transform: translate(40px, -30px) scale(1.1);
+    }
+
+    66% {
+        transform: translate(-30px, 20px) scale(0.9);
+    }
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: scale(0.33);
+        opacity: 1;
+    }
+
+    80%,
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+.mono-cursor {
+    animation: blink 1s step-end infinite;
+}
+
+/* ── ORBS ── */
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    pointer-events: none;
+    z-index: 0;
+    animation: orbMove 15s ease-in-out infinite;
+    opacity: 0.6;
+}
+
+/* ── GRADIENTS ── */
+.grad-text {
+    background: linear-gradient(135deg, #a29bfe 0%, #00cec9 50%, #fdcb6e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.grad-btn {
+    background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+    border: none;
+    color: #fff;
+    box-shadow: 0 10px 30px var(--acc-glow), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.grad-btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.grad-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 15px 40px var(--acc-glow);
+}
+
+/* ── BADGE ── */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border-radius: 99px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 1px solid currentColor;
+}
+
+/* ── REVEAL ── */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ── TICKER/MARQUEE ── */
+.ticker-wrap {
+    overflow: hidden;
+    padding: 16px 0;
+    mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+}
+
+.ticker-track {
+    display: flex;
+    gap: 64px;
+    width: max-content;
+    animation: scroll 40s linear infinite;
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* ── MOCKUP ── */
+.phone-mockup {
+    width: 250px;
+    height: 520px;
+    border-radius: 44px;
+    background: #000;
+    border: 10px solid #1a1b1e;
+    box-shadow: 0 50px 100px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.phone-screen {
+    width: 100%;
+    height: 100%;
+    background: var(--bg1);
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── NOISE ── */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+}
